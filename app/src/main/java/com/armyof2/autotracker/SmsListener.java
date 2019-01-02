@@ -9,6 +9,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -38,6 +41,8 @@ public class SmsListener extends BroadcastReceiver {
     NotificationManager notificationManager;
     @Override
     public void onReceive(Context context, Intent intent) {
+
+
         // TODO Auto-generated method stub
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
@@ -63,10 +68,12 @@ public class SmsListener extends BroadcastReceiver {
                     Log.d("TAG" ,"onReceive: "+ msgBody);
                     //Toast.makeText(context, "Message received", Toast.LENGTH_SHORT).show();
                     WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-
+                   ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
                     Flag=wifi.getWifiState();
-
-
+                    if(Flag==1 || Flag==0)
+                    {
+                        connectivityManager.setNetworkPreference(ConnectivityManager.TYPE_MOBILE);
+                    }
 
                 }catch(Exception e){
 //                            Log.d("Exception caught",e.getMessage());
@@ -76,6 +83,10 @@ public class SmsListener extends BroadcastReceiver {
             if(msgBody.contains(comp)) {
                 smsHostId = msgBody.split(" ");
                 Log.d("TAG", "onReceive: " + smsHostId[2]);
+                LocationServices locationServices = null;
+                Location location;
+
+               location = locationServices.TrackLocation();
 
                 myRef.addChildEventListener(new ChildEventListener() {
                     @Override
@@ -119,16 +130,15 @@ public class SmsListener extends BroadcastReceiver {
                 Toast.makeText(context, "Tracker Enabled", Toast.LENGTH_SHORT).show();
                 if (Flag == 0 || Flag == 1) {
                     new CountDownTimer(20000, 1000) {
-
                         public void onTick(long millisUntilFinished) {
                             wifi.setWifiEnabled(true);
                         }
-
                         public void onFinish() {
                             wifi.setWifiEnabled(false);
                         }
                     }.start();
                 }
+                locationServices.onDestroy();
 
             }
         }

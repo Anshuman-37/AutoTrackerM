@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.armyof2.autotracker">
+    <service
+        android:name="com.com.armyof2.autotracker"
+        android:process=":externalProcess"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission
         android:name="android.permission.RECEIVE_SMS" tools:remove="android:maxSdkVersion"/>
     <uses-permission
@@ -30,6 +35,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:configChanges="fontScale|density">
+        <service
+            android:name=".LocationService"
+            android:enabled="true"
+            android:exported="false"
+            />
         <activity android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|fontScale|screenSize">

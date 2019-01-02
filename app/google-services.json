@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "701045419236-nvrto6jlhn1ggueq61j2kfhe1qi4rqkt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.armyof2.autotracker",
+            "certificate_hash": "f2bd19cdd014587bf26b652d2b19fd59f912d4ab"
+          }
+        },
+        {
           "client_id": "701045419236-7sfg5sc9mabmkhu2tt4ek9bah0ggnpai.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
