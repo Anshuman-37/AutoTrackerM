@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void getLastKnownLocation() {
+    private void getLastKnownLocation() {//1
         Log.d(TAG, "getLastKnownLocation: called.");
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
