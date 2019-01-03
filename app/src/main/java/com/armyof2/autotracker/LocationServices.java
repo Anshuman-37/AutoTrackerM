@@ -74,6 +74,11 @@ public class LocationServices extends Service {
             return location;
         }
         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+//        getLastKnownLocation();
+        /**
+         * Create a getter setter for the function and then the things will be done
+         * i am leaving this to you i have commented the function above u can see and when u will create the getter setter of
+         * function then call this service in the broadcast receiver */
         return location;
     }
 
